@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ticket Purchase</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	</head>
+
+	<body>
+		<div id = "purchaseVue">
+		<h1> Purchase your ticket</h1>
+		<h2>Welcome: <br>
+			Choose your Movie: <br>
+			<input type="button" value="cart" v-on:click="showCart"/>
+			<input type="button" value="logout" v-on:click="logOut"/>
+			<span v-if="message">{{message}}</span>
+			<input v-model="silipQuantity" />
+			<p>{{silipQuantity}}</p>
+		</h2>
+		<hr>
+		<div align="center">
+			<div style="float: left;">
+			<img src = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6262/6262687_sa.jpg;maxHeight=640;maxWidth=550" style="width:200px;height:300px;"> <br>
+			Title: Silip<br>
+			Number of Tickets: <input type="text" name="silipQuantity" min='1'max='10' v-model="silipQuantity"><br />
+			<p>{{silipQuantity}}</p>
+ 			<input type="button" value="add to cart" v-on:click="addSilipToCart"/>
+ 		</div>
+ 		<div style="float: left; width: 650px" align="center">
+ 			<img src = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6262/6262687_sa.jpg;maxHeight=640;maxWidth=550" style="width:200px;height:300px;"> <br>
+ 			Title: Tuyong Lumpia<br>
+			Number of Tickets: <input type="number" name="TuyongLumpiaQuantity" min="1"><br>
+ 			<input type="button" value="add to cart" v-on:click="addTuyongLumpiaToCart"/>
+ 		</div>
+ 		<div style="float: right;">
+ 			<img src = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6262/6262687_sa.jpg;maxHeight=640;maxWidth=550" style="width:200px;height:300px;"> <br>
+ 			Title: Ginataang Mani<br>
+			Number of Tickets: <input type="number" name="GinataangManiQuantity" min="1"><br>
+ 			<input type="button" value="add to cart" v-on:click="addGinataangManiToCart"/>
+		</div>
+		</div>
+	</div>
+<script src = "vue_app.js"></script>
+	</body>
+</html>
