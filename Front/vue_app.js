@@ -48,7 +48,13 @@ var purchaseTix = new Vue
       silipQuantity: null,
       TuyongLumpiaQuantity: null,
       GinataangManiQuantity:null,
-      message1: "try"
+      message1: "try",
+      ticket_template: null,
+      t_id: localStorage.getItem('tid'),
+      t_mTitle: localStorage.getItem('mTitle'),
+      t_tQuantity: localStorage.getItem('tQuantity'),
+      t_tPrice: localStorage.getItem('tPrice'),
+      t_tDatePurchased: localStorage.getItem('tDatePurchased')
     },
     methods:
     {
@@ -60,6 +66,7 @@ var purchaseTix = new Vue
         silipQuantity: this.silipQuantity,
       })
         .then(response => {this.message1 = response.data;})
+        setTimeout(location.reload.bind(location), 250);
       },
 
       addTuyongLumpiaToCart: function()
@@ -70,6 +77,7 @@ var purchaseTix = new Vue
         TuyongLumpiaQuantity: this.TuyongLumpiaQuantity
       })
       .then(response => {this.message1 = response.data;})
+        setTimeout(location.reload.bind(location), 250);
       },
 
       addGinataangManiToCart: function()
@@ -80,13 +88,21 @@ var purchaseTix = new Vue
         GinataangManiQuantity: this.GinataangManiQuantity
       })
       .then(response => {this.message1 = response.data;})
-      }
-
+        setTimeout(location.reload.bind(location), 250);
+      },
+      refresh: function()
+      {
+      axios.get('http://localhost:5000/cart')
+      .then(response => {this.ticket_template = response.data;});
+    },
+    update: function(value) {
+      alert(value)
+    }
       }
     }
 )
 
-var showCart = new Vue
+/*var showCart = new Vue
 (
   {
     el:"#showingCart",
@@ -117,4 +133,4 @@ var showCart = new Vue
 
     }
   }
-)
+)*/

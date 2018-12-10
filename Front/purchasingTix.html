@@ -2,55 +2,50 @@
 <html>
 	<head>
 		<title>Ticket Purchase</title>
-		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<link rel="stylesheet" href="tix.css">
 	</head>
-
 	<body>
 		<div id = "purchaseVue">
-		<h1> Purchase your ticket</h1>
-		<h2>Welcome: <br>
-			Choose your Movie: <br>
-			<input type="button" value="logout" v-on:click="logOut"/>
-	<div class="w3-container">
-    <link rel="stylesheet" type="text/css" href="cart.css">
-  	<button onclick="document.getElementById('id01').style.display='block'">view cart</button>
-  	<div id="id01" class="modal">
-    	<div id = "showingCart" class="modal-content">
-        <span onclick="document.getElementById('id01').style.display='none'">&times;</span>
-        <p>Some text. Some text. Some text.</p>
-				<input type="button" value="refresh" v-on:click="refresh"/>
-				<template v-for="item in ticket_template">
-					<span>{{item}}</span>
+			<h1> Purchase your ticket</h1>
+			<div id="div-cart">
+				<p>My Cart</p>
+				<template v-for="(value, key) in ticket_template">
+					<p v-on:click="update(value['movie_title'])" class="ticket">QTY: {{value['ticket_quantity']}}, TITLE: {{value['movie_title']}}</p>
 				</template>
-        <p>Some text. Some text. Some text.</p>
-    	</div>
-  	</div>
-	</div>
-
-		</h2>
-		<hr>
-		<div align="center">
-			<div style="float: left;">
-			<img src = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6262/6262687_sa.jpg;maxHeight=640;maxWidth=550" style="width:200px;height:300px;"> <br>
-			Title: Silip<br>
-			Number of Tickets: <input type="number" name="silipQuantity" min= "1" max= "10" v-model="silipQuantity"><br />
- 			<input type="button" value="add to cart" v-on:click="addSilipToCart"/> <br>
- 		</div>
- 		<div style="float: left; width: 650px" align="center">
- 			<img src = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6262/6262687_sa.jpg;maxHeight=640;maxWidth=550" style="width:200px;height:300px;"> <br>
- 			Title: Tuyong Lumpia<br>
-			Number of Tickets: <input type="number" name="TuyongLumpiaQuantity" min='1' max ='10' v-model="TuyongLumpiaQuantity"><br>
- 			<input type="button" value="add to cart" v-on:click="addTuyongLumpiaToCart"/>
- 		</div>
- 		<div style="float: right;">
- 			<img src = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6262/6262687_sa.jpg;maxHeight=640;maxWidth=550" style="width:200px;height:300px;"> <br>
- 			Title: Ginataang Mani<br>
-			Number of Tickets: <input type="number" name="GinataangManiQuantity" min="1" max='10' v-model='GinataangManiQuantity'><br>
- 			<input type="button" value="add to cart" v-on:click="addGinataangManiToCart"/>
+			</div>
+			<input id="div-cart-purchase" type="button" value="Purchase" v-on:click="refresh"/>
+			<input id="div-cart-refresh" type="button" value="Refresh Cart" v-on:click="refresh"/>
+			<h2>Welcome!
+				Choose your Movie: <br>
+				<input type="button" value="logout" v-on:click="logOut"/>
+			</h2>
+			<hr>
+			<div align="center">
+				<div style="float: left;">
+					<img src = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6262/6262687_sa.jpg;maxHeight=640;maxWidth=550" style="width:200px;height:300px;"> <br>
+					Title: Silip<br>
+					Number of Tickets: <input type="number" name="silipQuantity" min= "1" max= "10" v-model="silipQuantity"><br />
+		 			<input type="button" value="add to cart" v-on:click="addSilipToCart"/> <br> <br>
+				<div v-for="item in ticket_template">
+					<span>{{item}}</span>
+				</div>
+	 			</div>
+		 		<div style="float: left; width: 650px" align="center">
+		 			<img src = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6262/6262687_sa.jpg;maxHeight=640;maxWidth=550" style="width:200px;height:300px;"> <br>
+		 			Title: Tuyong Lumpia<br>
+					Number of Tickets: <input type="number" name="TuyongLumpiaQuantity" min='1' max ='10' v-model="TuyongLumpiaQuantity"><br>
+		 			<input type="button" value="add to cart" v-on:click="addTuyongLumpiaToCart"/>
+		 		</div>
+		 		<div style="float: right;">
+		 			<img src = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6262/6262687_sa.jpg;maxHeight=640;maxWidth=550" style="width:200px;height:300px;"> <br>
+		 			Title: Ginataang Mani<br>
+					Number of Tickets: <input type="number" name="GinataangManiQuantity" min="1" max='10' v-model='GinataangManiQuantity'><br>
+		 			<input type="button" value="add to cart" v-on:click="addGinataangManiToCart"/>
+				</div>
+			</div>
 		</div>
-		</div>
-	</div>
 		<script src = "vue_app.js"></script>
 	</body>
 </html>
