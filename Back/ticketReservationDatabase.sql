@@ -15,3 +15,7 @@ CREATE TABLE ticket (
     ticketPrice INT NOT NULL,
     ticketQuantity INT NOT NUll
 );
+
+select * from userAccount;
+
+select * from ticket;
