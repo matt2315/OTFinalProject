@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ticket Purchase</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	</head>
+
+	<body>
+    <div id = "showingCart">
+				<input type="button" value="refresh" v-on:click="refresh"/>
+				<div v-for="item in ticket_template">
+					<span>{{item}}</span>
+				</div>
+   </div>
+	<script src = "vue_app.js"></script>
+	</body>
+</html>
