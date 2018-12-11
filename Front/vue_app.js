@@ -56,9 +56,11 @@ var purchaseTix = new Vue
       t_tPrice: localStorage.getItem('tPrice'),
       t_tDatePurchased: localStorage.getItem('tDatePurchased'),
       showcart: false,
+      showcart2: false,
       testMessage: null,
       u_qty:null,
       u_title: null,
+      o_id: null,
     },
     methods:
     {
@@ -119,6 +121,7 @@ var purchaseTix = new Vue
       cancelupdate: function()
       {
         this.showcart = false;
+        this.showcart2 = false;
       },
       updateTicket: function()
       {
@@ -132,42 +135,25 @@ var purchaseTix = new Vue
 
       })
       .then (response => {this.testMessage = response.data})
-      alert("cart Updated")
+      alert("Ticket Updated")
       setTimeout(location.reload.bind(location), 250);
-      }
+    },
+    deleteTicket: function()
+    {
+      axios.get('http://localhost:5000/delete_ticket',
+      {
+          u_title: this.u_title
+      })
+      .then (response => {this.testMessage = response.data})
+      alert("Ticket Deleted")
+      setTimeout(location.reload.bind(location), 250);
+    },
+    purchase: function()
+    {
+      this.showcart2 = true
+      axios.get('http://localhost:5000/purchaseNow')
+      .then(response => {this.testMessage = response.data});
+    }
     }
   }
 )
-
-/*var showCart = new Vue
-(
-  {
-    el:"#showingCart",
-    data:
-    {
-      ticket_template:
-      {
-        ticket_id: '',
-        movie_title: '',
-        ticket_quantity: '',
-        ticket_price: '',
-        ticket_date_purchased: ''
-      },
-      t_id: localStorage.getItem('tid'),
-      t_mTitle: localStorage.getItem('mTitle'),
-      t_tQuantity: localStorage.getItem('tQuantity'),
-      t_tPrice: localStorage.getItem('tPrice'),
-      t_tDatePurchased: localStorage.getItem('tDatePurchased')
-    },
-    methods:
-    {
-      refresh: function()
-      {
-        console.log('anytext')
-        axios.get('http://localhost:5000/cart')
-        .then(response => {this.ticket_template = response.data;})
-      }
-
-    }
-  }
-)*/

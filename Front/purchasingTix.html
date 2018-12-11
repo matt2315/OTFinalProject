@@ -20,11 +20,19 @@
 					QTY: <input type="number" min="1" max="10" size="2" maxlength="2" v-model="u_qty" /> <br />
 					TITLE: {{u_title}}<br/>
 					<button type="button" name="button" v-on:click ="updateTicket">Update</button>
-					<button type="button" name="button">Delete</button>
+					<button type="button" name="button" v-on:click = "deleteTicket">Delete</button>
 					<button type="button" name="button" v-on:click="cancelupdate">Cancel</button>
 				</div>
 			</div>
-			<input id="div-cart-purchase" type="button" value="Purchase" v-on:click="refresh"/>
+			<div id="overlay" v-show='showcart2'>
+				<div id="movie_detail">
+					9 DIGIT CREDIT CARD NUMBER: <input type="number" min="10000000" max="999999999" size="2" maxlength="2" v-model="u_qty" /> <br />
+					Total Price = {{testMessage}}<br/>
+					<button type="button" name="button">Purchase</button>
+					<button type="button" name="button" v-on:click="cancelupdate">Cancel</button>
+				</div>
+			</div>
+			<input id="div-cart-purchase" type="button" value="Purchase" v-on:click="purchase"/>
 			<input id="div-cart-refresh" type="button" value="Refresh Cart" v-on:click="refresh"/>
 			<h2>Welcome!
 				Choose your Movie: <br>
