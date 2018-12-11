@@ -12,14 +12,23 @@
 			<div id="div-cart">
 				<p>My Cart</p>
 				<template v-for="(value, key) in ticket_template">
-					<p v-on:click="update(value['movie_title'])" class="ticket">QTY: {{value['ticket_quantity']}}, TITLE: {{value['movie_title']}}</p>
+					<p v-on:click="update(key)" class="ticket">QTY: {{value['ticket_quantity']}}, TITLE: {{value['movie_title']}}</p>
 				</template>
+			</div>
+			<div id="overlay" v-show='showcart'>
+				<div id="movie_detail">
+					QTY: <input type="number" min="1" max="10" size="2" maxlength="2" v-model="u_qty" /> <br />
+					TITLE: {{u_title}}<br/>
+					<button type="button" name="button" v-on:click ="updateTicket">Update</button>
+					<button type="button" name="button">Delete</button>
+					<button type="button" name="button" v-on:click="cancelupdate">Cancel</button>
+				</div>
 			</div>
 			<input id="div-cart-purchase" type="button" value="Purchase" v-on:click="refresh"/>
 			<input id="div-cart-refresh" type="button" value="Refresh Cart" v-on:click="refresh"/>
 			<h2>Welcome!
 				Choose your Movie: <br>
-				<input type="button" value="logout" v-on:click="logOut"/>
+				<input type="button" value="logout" v-on:click=""/>
 			</h2>
 			<hr>
 			<div align="center">
@@ -28,9 +37,6 @@
 					Title: Silip<br>
 					Number of Tickets: <input type="number" name="silipQuantity" min= "1" max= "10" v-model="silipQuantity"><br />
 		 			<input type="button" value="add to cart" v-on:click="addSilipToCart"/> <br> <br>
-				<div v-for="item in ticket_template">
-					<span>{{item}}</span>
-				</div>
 	 			</div>
 		 		<div style="float: left; width: 650px" align="center">
 		 			<img src = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6262/6262687_sa.jpg;maxHeight=640;maxWidth=550" style="width:200px;height:300px;"> <br>

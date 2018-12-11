@@ -54,7 +54,11 @@ var purchaseTix = new Vue
       t_mTitle: localStorage.getItem('mTitle'),
       t_tQuantity: localStorage.getItem('tQuantity'),
       t_tPrice: localStorage.getItem('tPrice'),
-      t_tDatePurchased: localStorage.getItem('tDatePurchased')
+      t_tDatePurchased: localStorage.getItem('tDatePurchased'),
+      showcart: false,
+      testMessage: null,
+      u_qty:null,
+      u_title: null,
     },
     methods:
     {
@@ -94,12 +98,45 @@ var purchaseTix = new Vue
       {
       axios.get('http://localhost:5000/cart')
       .then(response => {this.ticket_template = response.data;});
-    },
-    update: function(value) {
-      alert(value)
-    }
+      },
+      viewcart: function()
+      {
+        this.showcart = true
+      },
+      update: function(key)
+      {
+        this.showcart = true
+        axios.get('http://localhost:5000/update_qty',
+        {params: {
+          id: key
+        }})
+        .then(response =>
+          {
+          this.u_qty = response['data']['qty'];
+          this.u_title = response['data']['title'];
+          })
+      },
+      cancelupdate: function()
+      {
+        this.showcart = false;
+      },
+      updateTicket: function()
+      {
+        axios.get('http://localhost:5000/update_Ticket',
+      {
+        params:
+        {
+            u_qty: this.u_qty,
+            u_title: this.u_title
+        }
+
+      })
+      .then (response => {this.testMessage = response.data})
+      alert("cart Updated")
+      setTimeout(location.reload.bind(location), 250);
       }
     }
+  }
 )
 
 /*var showCart = new Vue

@@ -6,6 +6,28 @@ body{
     font-family: sans-serif;
 }
 
+/* OVERLAY */
+#movie_detail {
+  height: 100px;
+  width: 300px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-left: -150px;
+  margin-top: -50px;
+  background-color: red;
+}
+
+#overlay {
+  top: 0;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.3);
+}
+
+/* ****************** */
+
 #div-cart {
   border: 1px gray solid;
   position: absolute;
