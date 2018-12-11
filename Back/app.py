@@ -120,7 +120,20 @@ def cart():
         list_tickets[t.tId]=ticketer
     return jsonify(list_tickets)
 
+@app.route('/update_qty', methods=['GET'])
+def up_qty():
+    e_id = request.args.get('id', 0)
+    movie = ticket.query.filter(ticket.tId == e_id).first()
+    return jsonify({'title': movie.mTitle, 'qty':movie.tQuantity})
 
+@app.route('/update_Ticket', methods=['GET'])
+def updateTicketing():
+    updateQuantity = request.args.get('u_qty', 0)
+    updateQuantityMtitle = request.args.get('u_title', 0)
+    newQty = ticket.query.filter(ticket.mTitle == updateQuantityMtitle).first()
+    newQty.tQuantity = int(updateQuantity)
+    db.session.commit()
+    return str(updateQuantity)
 
 
 
