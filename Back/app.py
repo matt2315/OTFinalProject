@@ -134,7 +134,34 @@ def purchase_now():
         totalTickets+=ticketssss.tQuantity
     return str(totalPrice)
 
+@app.route('/toHistory', methods=["POST"])
+def to_History():
+    totalPrice = 0
+    totalTickets = 0
+    addPrice = ticket.query.filter().all()
+    for ticketssss in addPrice:
+        totalPrice+=ticketssss.tPrice
+        totalTickets+=ticketssss.tQuantity
+    historyTotalPrice = totalPrice
+    historyTotalTickets = totalTickets
+    newHistory = histories(total_sale = historyTotalPrice, total_ticket_quantity = historyTotalTickets, history_Date = datetime.datetime.now().date())
+    db.session.add(newHistory)
+    db.session.commit()
+    return "History made"
 
+@app.route('/gethistory', methods=['GET'])
+def gethistory():
+    history_list = {}
+    history = {}
+    hist = histories.query.filter().all()
+    for h in hist:
+        history = {
+            'history_date': h.history_Date,
+            'history_sale': h.total_sale,
+            'history_quantity': h.total_ticket_quantity,
+        }
+        history_list[h.history_Id]=history
+    return jsonify(history_list)
 
 if __name__ == "__main__":
     app.run()
