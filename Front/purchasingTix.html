@@ -10,7 +10,7 @@
 		<div id = "purchaseVue">
 			<h1> Purchase your ticket</h1>
 			<div id="div-cart">
-				<p>My Cart</p>
+				<p>Reserved Tickets</p>
 				<template v-for="(value, key) in ticket_template">
 					<p v-on:click="update(key)" class="ticket">QTY: {{value['ticket_quantity']}}, TITLE: {{value['movie_title']}}</p>
 				</template>
@@ -24,11 +24,22 @@
 					<button type="button" name="button" v-on:click="cancelupdate">Cancel</button>
 				</div>
 			</div>
+			<div id="overlay" v-show='showcart3'>
+				<div id="history_detail">
+					<p>HISTORY</p>
+					<template v-for="(value, key) in history_list">
+						DATE : {{value['history_date']}} <br/>
+						QTY  : {{value['history_quantity']}} <br />
+						PRICE: {{value['history_sale']}}php
+					</template><br />
+					<button type="button" name="button" v-on:click="cancelupdate">Cancel</button>
+				</div>
+			</div>
 			<div id="overlay" v-show='showcart2'>
 				<div id="movie_detail">
 					9 DIGIT CREDIT CARD NUMBER: <input type="number" min="10000000" max="999999999" size="2" maxlength="2" v-model="u_qty" /> <br />
 					Total Price = {{testMessage}}<br/>
-					<button type="button" name="button">Purchase</button>
+					<button type="button" name="button" v-on:click = "toTheHistory">Purchase</button>
 					<button type="button" name="button" v-on:click="cancelupdate">Cancel</button>
 				</div>
 			</div>
@@ -37,6 +48,7 @@
 			<h2>Welcome!
 				Choose your Movie: <br>
 				<input type="button" value="logout" v-on:click=""/>
+				<input type="button" value="history" v-on:click="updatecart3"/>
 			</h2>
 			<hr>
 			<div align="center">

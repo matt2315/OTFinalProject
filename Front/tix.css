@@ -18,6 +18,18 @@ body{
   background-color: red;
 }
 
+#history_detail {
+  height: 300px;
+  width: 500px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-left: -250px;
+  margin-top: -150px;
+  background-color: green;
+}
+
+
 #overlay {
   top: 0;
   position: fixed;

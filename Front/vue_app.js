@@ -61,6 +61,12 @@ var purchaseTix = new Vue
       u_qty:null,
       u_title: null,
       o_id: null,
+      hdate: null,
+      hsale: null,
+      hquantity: null,
+      historymade: 'empty',
+      showcart3: false,
+      history_list: null
     },
     methods:
     {
@@ -104,6 +110,12 @@ var purchaseTix = new Vue
       viewcart: function()
       {
         this.showcart = true
+      },
+      updatecart3: function()
+      {
+        this.showcart3 = true
+        axios.get('http://localhost:5000/gethistory')
+        .then(response => {this.history_list = response.data})
       },
       update: function(key)
       {
@@ -153,6 +165,17 @@ var purchaseTix = new Vue
       this.showcart2 = true
       axios.get('http://localhost:5000/purchaseNow')
       .then(response => {this.testMessage = response.data});
+    },
+    toTheHistory: function()
+    {
+      axios.post('http://localhost:5000/toHistory',
+    {
+      hdate: this.hdate,
+      hsale: this.hsale,
+      hquantity: this.hquantity
+    })
+      .then(response => {this.historymade = response.data;})
+      setTimeout(location.reload.bind(location), 250);
     }
     }
   }
