@@ -49,13 +49,6 @@ def purchaseSilip():
         newTix = ticket(mTitle = 'Silip', tQuantity = sQuantity, tPrice = sQuantity * 50, tDatePurchased = datetime.datetime.now().date())
         db.session.add(newTix)
         db.session.commit()
-
-    #while sQuantity != 0:
-    #        newTix = ticket(mTitle = 'Silip', tQuantity = 1, tPrice = 50, tDatePurchased = datetime.datetime.now().date())
-    #        db.session.add(newTix)
-    #        db.session.commit()
-    #        sQuantity -= 1
-    #if sQuantity == 0:
     return "Silip ticket reserved"
 
 @app.route('/purchaseTix2', methods = ["POST"])
@@ -72,12 +65,6 @@ def purchaseTuyongLumpia():
         newTix = ticket(mTitle = 'Tuyong Lumpia', tQuantity = lQuantity, tPrice = lQuantity * 50, tDatePurchased = datetime.datetime.now().date())
         db.session.add(newTix)
         db.session.commit()
-    #while tQuantity != 0:
-    #        newTix = ticket(mTitle = 'Tuyong Lumpia', tQuantity = 1, tPrice = 50, tDatePurchased = datetime.datetime.now().date())
-    #        db.session.add(newTix)
-    #        db.session.commit()
-    #        tQuantity -= 1
-    #if tQuantity == 0:
     return "Silip ticket reserved"
 
 @app.route('/purchaseTix3', methods = ["POST"])
@@ -94,12 +81,6 @@ def purchaseGinataangMani():
         newTix = ticket(mTitle = 'Ginataang Mani', tQuantity = gQuantity, tPrice = gQuantity*50, tDatePurchased = datetime.datetime.now().date())
         db.session.add(newTix)
         db.session.commit()
-    #while gQuantity != 0:
-    #        newTix = ticket(mTitle = 'Ginataang Mani', tQuantity = 1, tPrice = 50, tDatePurchased = datetime.datetime.now().date())
-    #        db.session.add(newTix)
-    #        db.session.commit()
-    #        gQuantity -= 1
-    #if gQuantity == 0:
     return "Silip ticket reserved"
 
 
@@ -134,6 +115,24 @@ def updateTicketing():
     newQty.tQuantity = int(updateQuantity)
     db.session.commit()
     return str(updateQuantity)
+
+@app.route('/delete_ticket', methods=["GET"])
+def deleteTicketing():
+    deleteMtitle = request.args.get('u_title', 0)
+    deleteTix = ticket.query.filter(ticket.mTitle == deleteMtitle).first()
+    db.session.delete(deleteTix)
+    db.session.commit()
+    return str("deleted")
+
+@app.route('/purchaseNow',methods=["GET"])
+def purchase_now():
+    totalPrice = 0
+    totalTickets = 0
+    addPrice = ticket.query.filter().all()
+    for ticketssss in addPrice:
+        totalPrice+=ticketssss.tPrice
+        totalTickets+=ticketssss.tQuantity
+    return str(totalPrice)
 
 
 

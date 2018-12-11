@@ -26,3 +26,17 @@ class ticket(db.Model):
         self.tDatePurchased =tDatePurchased
         self.tPrice = tPrice
         self.tQuantity = tQuantity
+
+class histories(db.Model):
+    __tablename__=Configuration.HISTORY_TABLENAME
+    history_Id = db.Column('historyId', db.Integer, primary_key=True)
+    history_Date = db.Column('historyDate', db.Unicode)
+    total_sale = db.Column('totalSale', db.Integer)
+    total_ticket_quantity = db.Column('totalticketQuantity', db.Integer)
+    owner_Id = db.Column('ownerId', db.Integer)
+
+    def __init__(self, history_Id, history_Date, total_sale, total_ticket_quantity):
+        self.history_Date = history_Date
+        self.total_sale = total_sale
+        self.total_ticket_quantity = total_ticket_quantity
+        self.owner_Id = owner_Id

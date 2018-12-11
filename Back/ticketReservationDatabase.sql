@@ -16,6 +16,14 @@ CREATE TABLE ticket (
     ticketQuantity INT NOT NUll
 );
 
+CREATE TABLE history (
+    historyId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    historyDate  DATE NOT NULL,
+    totalSale INT NOT NULL,
+    totalticketQuantity INT NOT NUll
+    ownerId INT 
+);
+
 select * from userAccount;
 
 select * from ticket;
